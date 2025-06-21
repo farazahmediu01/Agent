@@ -25,7 +25,5 @@ set_tracing_disabled(True)
 
 
 agent = Agent(name="Assistant", instructions="You are a helpful assistant", model=model)
-
-
 result = Runner.run_sync(agent, "Hello How are you?")
 print(result.final_output)

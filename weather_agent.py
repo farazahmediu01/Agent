@@ -95,7 +95,9 @@ while True:
 
     while True:
         response = client.chat.completions.create(
-            model="gemini-2.5-flash", response_format={"type": "json_object"}, messages=messages
+            model="gemini-2.5-flash",
+            response_format={"type": "json_object"},
+            messages=messages,
         )
 
         parsed_output: dict = json.loads(response.choices[0].message.content)
@@ -109,7 +111,7 @@ while True:
             tool_name = parsed_output.get("function")
             tool_input = parsed_output.get("input")
 
-            if avaiable_tools.get(tool_name, False) != False:
+            if avaiable_tools.get(tool_name):
                 output = avaiable_tools[tool_name].get("fn")(tool_input)
                 messages.append(
                     {
